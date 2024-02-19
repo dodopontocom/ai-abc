@@ -3,16 +3,13 @@ description: Crie código de hello-world nas linguagens disponíveis
 labels: ["IA", "Hello World"]
 
 body:
+  - type: issues-area
+    title: Linguagem
+    placeholder: Digite a linguagem desejada (Python, Java, C++, JavaScript, etc.)
 
-  - type: input
-    id: linguagem
-    label: Linguagem
-    description: Digite a linguagem desejada (Python, Java, C++, JavaScript, etc.).
-
-  - type: input
-    id: funcionalidade_extra
-    label: Informação Adicional
-    description: Descreva uma funcionalidade extra simples para o código (exibir a data, formatar a saída, etc.).
+  - type: issues-area
+    title: Informação Adicional
+    placeholder: Descreva uma funcionalidade extra simples para o código (exibir a data, formatar a saída, etc.)
 
   - type: markdown
     value: |
@@ -21,7 +18,7 @@ body:
 
       Ao criar a issue, um workflow do GitHub Actions será criado automaticamente com as seguintes características:
 
-      * **Nome:** `Hello World - {{ linguagem }}`
+      * **Nome:** `Hello World - {{ issues-area.title[0] }}`
       * **Linguagem:** A linguagem escolhida no campo "Linguagem".
       * **Funcionalidade:** A funcionalidade extra descrita no campo "Informação Adicional".
       * **Steps:**
