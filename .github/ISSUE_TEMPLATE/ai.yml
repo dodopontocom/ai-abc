@@ -4,42 +4,42 @@ labels: ["IA", "Hello World"]
 
 body:
 
-- type: input
-  id: linguagem
-  label: Linguagem
-  description: Digite a linguagem desejada (Python, Java, C++, JavaScript, etc.).
+  - type: input
+    id: linguagem
+    label: Linguagem
+    description: Digite a linguagem desejada (Python, Java, C++, JavaScript, etc.).
 
-- type: input
-  id: funcionalidade_extra
-  label: Informação Adicional
-  description: Descreva uma funcionalidade extra simples para o código (exibir a data, formatar a saída, etc.).
+  - type: input
+    id: funcionalidade_extra
+    label: Informação Adicional
+    description: Descreva uma funcionalidade extra simples para o código (exibir a data, formatar a saída, etc.).
 
-- type: markdown
-  value: |
+  - type: markdown
+    value: |
 
-    # Workflow
+      # Workflow
 
-    Ao criar a issue, um workflow do GitHub Actions será criado automaticamente com as seguintes características:
+      Ao criar a issue, um workflow do GitHub Actions será criado automaticamente com as seguintes características:
 
-    * **Nome:** `Hello World - {{ linguagem }}`
-    * **Linguagem:** A linguagem escolhida no campo "Linguagem".
-    * **Funcionalidade:** A funcionalidade extra descrita no campo "Informação Adicional".
-    * **Steps:**
-        * **Checkout:** Obtém o código-fonte do repositório.
-        * **Executar código:** Executa o código "Hello World" com a funcionalidade extra.
-        * **Exibir resultado:** Exibe o resultado da execução do código.
+      * **Nome:** `Hello World - {{ linguagem }}`
+      * **Linguagem:** A linguagem escolhida no campo "Linguagem".
+      * **Funcionalidade:** A funcionalidade extra descrita no campo "Informação Adicional".
+      * **Steps:**
+          * **Checkout:** Obtém o código-fonte do repositório.
+          * **Executar código:** Executa o código "Hello World" com a funcionalidade extra.
+          * **Exibir resultado:** Exibe o resultado da execução do código.
 
-    # Observações
+      # Observações
 
-    * Este é apenas um exemplo. Você pode modificar o template e o workflow de acordo com suas necessidades.
-    * O código "Hello World" e a funcionalidade extra serão implementados pela inteligência artificial.
-    * Certifique-se de que a inteligência artificial esteja configurada para gerar código na linguagem desejada.
+      * Este é apenas um exemplo. Você pode modificar o template e o workflow de acordo com suas necessidades.
+      * O código "Hello World" e a funcionalidade extra serão implementados pela inteligência artificial.
+      * Certifique-se de que a inteligência artificial esteja configurada para gerar código na linguagem desejada.
 
-    # Como usar
+      # Como usar
 
-    1. Crie uma nova issue no repositório.
-    2. Selecione o template "Criar Código com IA".
-    3. Preencha os campos "Linguagem" e "Informação Adicional".
-    4. Clique em "Criar issue".
+      1. Crie uma nova issue no repositório.
+      2. Selecione o template "Criar Código com IA".
+      3. Preencha os campos "Linguagem" e "Informação Adicional".
+      4. Clique em "Criar issue".
 
-    O workflow do GitHub Actions será criado automaticamente e o código "Hello World" será executado com a funcionalidade extra.
+      O workflow do GitHub Actions será criado automaticamente e o código "Hello World" será executado com a funcionalidade extra.
