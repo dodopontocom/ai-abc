@@ -43,7 +43,7 @@ jobs:
 
       - name: "Commit changes"
         uses: EndBug/add-and-commit@v9
-        if: steps.wait.outcome == 'success'
+        if: steps.status.outcome == 'success'
         with:
           message: new code
           committer_name: GitHub Actions
