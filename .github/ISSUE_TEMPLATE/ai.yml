@@ -1,42 +1,26 @@
-name: Criar Código com IA
-description: Crie código de hello-world nas linguagens disponíveis
+name: gen AI
+description: Deixe a AI criar um hello-world-workflow com a linguagem escolhida
+title: "[add-pool]: "
 labels: ["IA", "Hello World"]
 
 body:
-  - type: issues-area
-    title: Linguagem
-    placeholder: Digite a linguagem desejada (Python, Java, C++, JavaScript, etc.)
-
-  - type: issues-area
-    title: Informação Adicional
-    placeholder: Descreva uma funcionalidade extra simples para o código (exibir a data, formatar a saída, etc.)
-
   - type: markdown
-    value: |
-
-      # Workflow
-
-      Ao criar a issue, um workflow do GitHub Actions será criado automaticamente com as seguintes características:
-
-      * **Nome:** `Hello World - {{ issues-area.title[0] }}`
-      * **Linguagem:** A linguagem escolhida no campo "Linguagem".
-      * **Funcionalidade:** A funcionalidade extra descrita no campo "Informação Adicional".
-      * **Steps:**
-          * **Checkout:** Obtém o código-fonte do repositório.
-          * **Executar código:** Executa o código "Hello World" com a funcionalidade extra.
-          * **Exibir resultado:** Exibe o resultado da execução do código.
-
-      # Observações
-
-      * Este é apenas um exemplo. Você pode modificar o template e o workflow de acordo com suas necessidades.
-      * O código "Hello World" e a funcionalidade extra serão implementados pela inteligência artificial.
-      * Certifique-se de que a inteligência artificial esteja configurada para gerar código na linguagem desejada.
-
-      # Como usar
-
-      1. Crie uma nova issue no repositório.
-      2. Selecione o template "Criar Código com IA".
-      3. Preencha os campos "Linguagem" e "Informação Adicional".
-      4. Clique em "Criar issue".
-
-      O workflow do GitHub Actions será criado automaticamente e o código "Hello World" será executado com a funcionalidade extra.
+    attributes:
+      value: |
+        Adicione aqui a linguagem
+  - type: input
+    id: linguagem
+    attributes:
+      label: ">>linguagem<<"
+      description: Escolha uma linguagem de programação
+      placeholder: python
+    validations:
+      required: true
+  - type: input
+    id: extra
+    attributes:
+      label: ">>funcionalidade_extra<<"
+      description: Tem uma ideia a mais?
+      placeholder: mostrar data atual
+    validations:
+      required: true
