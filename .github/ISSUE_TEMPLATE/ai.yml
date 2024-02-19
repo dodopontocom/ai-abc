@@ -23,4 +23,4 @@ body:
       description: Tem uma ideia a mais?
       placeholder: mostrar data atual
     validations:
-      required: true
+      required: false
