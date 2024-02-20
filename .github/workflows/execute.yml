@@ -39,7 +39,7 @@ jobs:
           linguagem: ${{ fromJson(needs.issue-to-json.outputs.payload-parsed)['linguagem'] }}
           extra: ${{ fromJson(needs.issue-to-json.outputs.payload-parsed)['funcionalidade_extra'] }}
 
-        run: echo "${linguagem} - ${extra}"
+        run: ./ai-abc.sh ${linguagem} ${extra}
 
       - name: "Commit changes"
         uses: EndBug/add-and-commit@v9
@@ -57,5 +57,5 @@ jobs:
             Closing issue with success status
             Reason: code added
           labels: |
-            pool_added
+            code_added
   
