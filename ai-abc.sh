@@ -7,10 +7,16 @@ echo "Gerando script Hello World em ${lang} com funcionalidade extra: ${extra}"
 
 case ${lang} in
   "python")
-    echo ${lang} ${extra} >> hello-world.py
+    cat << EOF >> hello-world.py
+#!/usr/bin/env python
+print("Hello World")
+EOF
     ;;
   "java")
-    echo ${lang} ${extra} >> hello-world.java
+    cat << EOF >> hello-world.java
+Sua string aqui.
+Outras linhas da sua string.
+EOF
     ;;
 esac
 
