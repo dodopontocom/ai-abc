@@ -7,8 +7,10 @@ echo "Gerando script Hello World em ${lang} com funcionalidade extra: ${extra}"
 
 case ${lang} in
   "python")
-    echo "```python
-    print(\'Hello World!\')
+    echo "
+    ```
+    python
+    print(\"HElloO World\")
 
     # Funcionalidade extra
     if '${extra}' == 'data':
@@ -17,7 +19,9 @@ case ${lang} in
     " > hello_world.py
     ;;
   "java")
-    echo "```java
+    echo "
+    ```
+    java
     public class HelloWorld {
       public static void main(String[] args) {
         System.out.println(\""Hello World!\");
@@ -28,7 +32,8 @@ case ${lang} in
         }
       }
     }
-    ```" > hello_world.java
+    ```
+    " > hello_world.java
     ;;
 esac
 
