@@ -1,6 +1,6 @@
 name: gen AI
 description: Deixe a AI criar um hello-world-workflow com a linguagem escolhida
-title: "[add-pool]: "
+title: "Criar uma pipeline de hello world"
 labels: ["IA", "Hello World"]
 
 body:
