@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 lang=$1
-extra=${1:-}
+extra=${2:-}
 
 echo "Gerando script Hello World em ${lang} com funcionalidade extra: ${extra}"
 
