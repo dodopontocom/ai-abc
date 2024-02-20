@@ -3,17 +3,18 @@
 lang=$1
 extra=${1:-}
 
-echo "Gerando script Hello World em $lang com funcionalidade extra: $extra"
+echo "Gerando script Hello World em ${lang} com funcionalidade extra: ${extra}"
 
-case $lang in
+case ${lang} in
   "python")
     echo "```python
-    print('Hello World!')
+    print(\'Hello World!\')
 
     # Funcionalidade extra
-    if '$extra' == 'data':
-      print('Data atual:', date)
-    ```" > hello_world.py
+    if '${extra}' == 'data':
+      print(\'Data atual:\', date)
+    ```
+    " > hello_world.py
     ;;
   "java")
     echo "```java
