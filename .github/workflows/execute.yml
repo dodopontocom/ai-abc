@@ -44,18 +44,6 @@ jobs:
           linguagem: ${{ fromJson(needs.issue-to-json.outputs.payload-parsed)['linguagem'] }}
         run: echo ${linguagem}
 
-      - name: 'Comment code'
-        if: steps.status.outcome == 'success'
-        uses: peter-evans/close-issue@v2
-        with:
-          close-reason: not_planned
-          comment: |
-            **This is your verification code**
-            Copy and paste the following line in #member-registration channel:
-            > /code ${{ steps.code.outputs.code_var }}
-          labels: |
-            code_send_to_user
-
       - name: "Commit changes"
         uses: EndBug/add-and-commit@v9
         if: steps.wait.outcome == 'success'
