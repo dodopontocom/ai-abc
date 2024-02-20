@@ -1,5 +1,4 @@
 name: criar hello world
-
 on:
   issues:
     types: [opened, reopened]
@@ -32,17 +31,15 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
-        #### Important, in case main branch is protected (for direct commits) it has to checkout in a valid branch
-        ### In this case, change below
-        #with:
-        #  ref: '<branch_name>'
      
       - name: 'code add'
         id: status
         continue-on-error: true
         env:
           linguagem: ${{ fromJson(needs.issue-to-json.outputs.payload-parsed)['linguagem'] }}
-        run: echo ${linguagem}
+          extra: ${{ fromJson(needs.issue-to-json.outputs.payload-parsed)['funcionalidade_extra'] }}
+
+        run: echo "${linguagem} - ${extra}"
 
       - name: "Commit changes"
         uses: EndBug/add-and-commit@v9
