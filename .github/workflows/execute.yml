@@ -31,10 +31,10 @@ jobs:
         echo "Gerando script..."
         ./generate_hello_world.sh $language $extra_functionality
 
-    - name: Commitar script
-      uses: EndBug/add-and-commit@v2
-      with:
-        add: ["hello_world.py"]
-        message: "Criado automaticamente a partir da issue #${{ github.event.issue.number }}"
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+    # - name: Commitar script
+    #   uses: EndBug/add-and-commit@v2
+    #   with:
+    #     add: ["hello_world.py"]
+    #     message: "Criado automaticamente a partir da issue #${{ github.event.issue.number }}"
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
 
