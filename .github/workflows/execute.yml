@@ -35,11 +35,13 @@ jobs:
       - name: 'code add'
         id: status
         continue-on-error: true
-        env:
-          linguagem: ${{ fromJson(needs.issue-to-json.outputs.payload-parsed)['linguagem'] }}
-          extra: ${{ fromJson(needs.issue-to-json.outputs.payload-parsed)['funcionalidade_extra'] }}
-
-        run: ./ai-abc.sh ${linguagem} ${extra}
+        uses: google/gemini-pro-action@v1
+        # env:
+        #   linguagem: ${{ fromJson(needs.issue-to-json.outputs.payload-parsed)['linguagem'] }}
+        #   extra: ${{ fromJson(needs.issue-to-json.outputs.payload-parsed)['funcionalidade_extra'] }
+        with:
+          prompt: ${{ fromJson(needs.issue-to-json.outputs.payload-parsed)['linguagem'] }}
+          output_file: poem.txt
 
       - name: "Commit changes"
         uses: EndBug/add-and-commit@v9
