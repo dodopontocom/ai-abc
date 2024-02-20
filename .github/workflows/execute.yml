@@ -1,0 +1,40 @@
+name: Criar Código a partir de Issue
+on:
+  issues:
+    types: [opened, reopened]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: peter-murray/issue-forms-body-parser@v2.0.0
+      with:
+        issue_id: ${{ github.event.issue.number }}
+        separator: '###'
+        label_marker_start: '>>'
+        label_marker_end: '<<'
+
+    - name: Extrair informações da issue
+      run: |
+        echo "Lendo JSON..."
+        cat issue_body.json
+
+        echo "Extraindo linguagem..."
+        language=$(jq -r '.language' issue_body.json)
+
+        echo "Extraindo funcionalidade extra..."
+        extra_functionality=$(jq -r '.extra_functionality' issue_body.json)
+
+    - name: Gerar script Hello World
+      run: |
+        echo "Gerando script..."
+        ./generate_hello_world.sh $language $extra_functionality
+
+    - name: Commitar script
+      uses: EndBug/add-and-commit@v2
+      with:
+        add: ["hello_world.py"]
+        message: "Criado automaticamente a partir da issue #${{ github.event.issue.number }}"
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+
