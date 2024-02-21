@@ -9,7 +9,7 @@ CONTENT=$(echo -e "
 curl --silent -H 'Content-Type: application/json' \
   -d '{\"contents\":[{\"parts\":[{\"text\":\"${PROMPT}\"}]}]}' \
   -X POST ${GEMINI_API_ENDPOINT}?key=${GEMINI_API_KEY} \
-  | jq '.candidates[0].content.parts[0].text'
+  | jq -r '.candidates[0].content.parts[0].text'
 ")
 
 echo "###########"
