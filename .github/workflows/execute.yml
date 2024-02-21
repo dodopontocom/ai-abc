@@ -54,10 +54,7 @@ jobs:
           result-encoding: string
           script: |
             const content = ${{ steps.read-file.outputs.content }}
-            github.issues.createComment({
-              issue_number: context.issue.number,
-              body: content
-            })
+            console.log(content)
 
       - name: 'Close issue: prompt showed!'
         uses: peter-evans/close-issue@v2
