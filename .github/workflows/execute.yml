@@ -37,14 +37,14 @@ jobs:
         continue-on-error: true
         env:
           prompt: ${{ fromJson(needs.issue-to-json.outputs.payload-parsed)['prompt'] }}
-        run: bash ./gemini.sh "${prompt}" "${{ secrets.GEMINI_API_KEY }}" > ./generated.txt
+        run: bash ./gemini.sh "${prompt}" "${{ secrets.GEMINI_API_KEY }}" > ./generated.md
 
       - name: preload file
         uses: juliangruber/read-file-action@v1
         if: steps.run.outcome == 'success'
         id: read-file
         with:
-          path: "./generated.txt"
+          path: "./generated.md"
 
       - name: "Commit changes"
         uses: EndBug/add-and-commit@v9
