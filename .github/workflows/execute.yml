@@ -46,12 +46,13 @@ jobs:
         with:
           path: "./generated.txt"
 
-      - name:
-        uses: actions/github-script@v6
-        if: steps.read-file.outcome == 'success'
-        id: add-comment
+      - name: "Commit changes"
+        uses: EndBug/add-and-commit@v9
+        if: steps.run.outcome == 'success'
         with:
-          result-encoding: string
+          message: ai generated file updated
+          committer_name: GitHub Actions
+          committer_email: actions@github.com
 
       - name: 'Close issue: prompt showed!'
         uses: peter-evans/close-issue@v2
