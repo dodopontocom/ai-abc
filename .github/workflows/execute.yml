@@ -40,7 +40,7 @@ jobs:
         run: bash ./gemini.sh "${prompt}" "${{ secrets.GEMINI_API_KEY }}" > ./generated.txt
 
       - name: preload file
-        uses: actions/github-actions/read-file@v1
+        uses: juliangruber/read-file-action@v1
         if: steps.run.outcome == 'success'
         id: read-file
         with:
