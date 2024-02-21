@@ -37,7 +37,7 @@ jobs:
         continue-on-error: true
         env:
           prompt: ${{ fromJson(needs.issue-to-json.outputs.payload-parsed)['prompt'] }}
-        run: bash ./gemini.sh "${prompt}" "${secrets.GEMINI_API_KEY}"
+        run: bash ./gemini.sh "${prompt}" "${{ secrets.GEMINI_API_KEY }}"
 
       - name: "Commit changes"
         uses: EndBug/add-and-commit@v9
