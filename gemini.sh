@@ -1,12 +1,17 @@
 #!/usr/bin/env bash
 
-string="falar 10 palavras sobre paulo leminski"
-stringc=$(echo "$string" | urlencode)
+GEMINI_API_ENDPOINT="https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent"
 
-curl ${GEMINI_API_ENDPOINT}/models/gemini-pro:generateContent?key=${GEMINI_API_KEY} \
-    -H 'Content-Type: application/json' \
-    -X POST \
-    -d '{
-      "contents": [{
-        "parts":[{
-          "text": "$stringc"}]}]}' 2> /dev/null
+PROMPT=$1
+GEMINI_API_KEY=$2
+
+CONTENT=$(echo -e " 
+curl --silent -H 'Content-Type: application/json' \
+  -d '{\"contents\":[{\"parts\":[{\"text\":\"${PROMPT}\"}]}]}' \
+  -X POST ${GEMINI_API_ENDPOINT}?key=${GEMINI_API_KEY} \
+  | jq '.candidates[0].content.parts[0].text'
+")
+
+echo "###########"
+eval ${CONTENT}
+echo "###########"

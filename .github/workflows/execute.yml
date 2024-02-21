@@ -6,7 +6,7 @@ on:
 jobs:
   issue-to-json:
     name: Convert issue body to json
-    if: contains(github.event.issue.body, '>>linguagem<<')
+    if: contains(github.event.issue.body, '>>prompt<<')
     runs-on: ubuntu-latest
     outputs:
       payload-parsed: ${{ steps.payload.outputs.json_var }}
@@ -25,23 +25,19 @@ jobs:
 
   execute-pipe:
     name: criar hello world
-    if: contains(github.event.issue.body, '>>linguagem<<')
+    if: contains(github.event.issue.body, '>>prompt<<')
     runs-on: ubuntu-latest
     needs: issue-to-json
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
      
-      - name: 'code add'
+      - name: 'show prompt'
         id: status
         continue-on-error: true
-        uses: google/gemini-pro-action@v1
-        # env:
-        #   linguagem: ${{ fromJson(needs.issue-to-json.outputs.payload-parsed)['linguagem'] }}
-        #   extra: ${{ fromJson(needs.issue-to-json.outputs.payload-parsed)['funcionalidade_extra'] }
-        with:
-          prompt: ${{ fromJson(needs.issue-to-json.outputs.payload-parsed)['linguagem'] }}
-          output_file: poem.txt
+        env:
+          prompt: ${{ fromJson(needs.issue-to-json.outputs.payload-parsed)['prompt'] }}
+        run: bash ./gemini.sh "${prompt}" "${secrets.GEMINI_API_KEY}"
 
       - name: "Commit changes"
         uses: EndBug/add-and-commit@v9
@@ -51,13 +47,13 @@ jobs:
           committer_name: GitHub Actions
           committer_email: actions@github.com
 
-      - name: 'Close issue: code added!'
+      - name: 'Close issue: prompt showed!'
         uses: peter-evans/close-issue@v2
         if: steps.status.outcome == 'success'
         with:
           comment: |
             Closing issue with success status
-            Reason: code added
+            Reason: prompt ok
           labels: |
-            code_added
+            prompt_showed
   

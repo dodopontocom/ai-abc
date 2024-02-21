@@ -1,6 +1,6 @@
 name: gen AI
-description: Deixe a AI criar um hello-world-workflow com a linguagem escolhida
-title: "Criar uma pipeline de hello world"
+description: Interagindo com a AI
+title: "Envie uma mensagem"
 labels: ["IA", "Hello World"]
 
 body:
@@ -9,18 +9,10 @@ body:
       value: |
         Adicione aqui a linguagem
   - type: input
-    id: linguagem
+    id: prompt
     attributes:
-      label: ">>linguagem<<"
-      description: Escolha uma linguagem de programação
-      placeholder: python
+      label: ">>prompt<<"
+      description: Envie uma mensagem ao gemini
+      placeholder: Ola, como vai você hoje?
     validations:
       required: true
-  - type: input
-    id: extra
-    attributes:
-      label: ">>funcionalidade_extra<<"
-      description: Tem uma ideia a mais?
-      placeholder: mostrar data atual
-    validations:
-      required: false
