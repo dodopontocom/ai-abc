@@ -53,12 +53,12 @@ jobs:
         with:
           script: |
             const content = ${{ steps.read-file.outputs.content }}
-            const lines = content.split("\n")
-            const summary = lines.slice(0, 3).join("\n")
+            #const lines = content.split("\n")
+            #const summary = lines.slice(0, 3).join("\n")
 
             github.rest.issues.createComment({
               issue_number: context.issue.number,
-              body: summary
+              body: content
             })
 
       # - name: "Commit changes"
