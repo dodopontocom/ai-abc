@@ -1,3 +1,67 @@
 ###########
- व्यवSee MOST Sec Sec Sec Sec Sec Sec Sec Sec MOST Sec Sec 10 minutes Sec Sec Sec 40 27-16 41 27-16 42 27-16 43 27-16 44 27-16 45 27-16 46 27-16 10 40 47 27-16 11 41 48 27-16 12 42 49 27-16 13 43 50 27-16 14 44 51 27-16 15 45 52 27-16 Time Since 46 53 27-16 16 47 54 27-16 17 48 55 27-16 18 49 56 27-16 19 50 57 27-16 20 51 58 27-16 21 52 59 27-16 22 Time Now 53 60 27-16 23 54 61 27-16 24 55 62 27-16 25 56 63 27-16 26 57 64 27-16 27 58 65 27-16 28 59 66 27-16 29 60 67 27-16 30 28 68 27-16 31 29 69 27-16 32 30 41 27-16 33 70 27-16 34 31 71 27-16 35 32 72 27-16 36 33 73 27-16 37 34 74 27-16 38 35 75 27-16 39 36 76 27-16 40 37 77 27-16 41 138 78 27-16 42 27-16 42 39 79 27-16 43 27-16 43 40 80 27-16 44 27-16 44 41 81 27-16 45 27-16 45 42 82 27-16 46 27-16 46 43 83 27-16 47 27-16 47 44 84 27-16 48 27-16 48 45 85 27-16 49 27-16 49 46 86 27-16 50 27-16 50 47 87 27-16 51 27-16 51 48 88 27-16 52 27-16 52 49 89 27-16 53 27-16 53 50 90 27-16 54 27-16 54 51 91 27-16 55 27-16 55 52 92 27-16 56 27-16 56 53 93 27-16 57 27-16 57 54 94 27-16 58 27-16 58 55 95 27-16 59 27-16 59 56 96 27-16 60 27-16 60 57 97 27-16 61 27-16 61 58 98 27-16 62 27-16 62 59 99 27-16 63 27-16 63 60 100 27-16 64 27-16 64 61 101 27-16 65 27-16 65 62 102 27-16 66 27-16 66 63 103 27-16 67 27-16 67 64 104 27-16 68 27-16 68 65 105 27-16 69 27-16 69 66 106 27-16 70 27-16 70 67 107 27-16 71 27-16 71 68 108 27-16 72 27-16 72 69 109 27-16 73 27-16 73 70 110 27-16 74 27-16 74 71 111 27-16 75 27-16 75 72 112 27-16 76 27-16 76 73 113 27-16 77 27-16 77 74 114 27-16 78 27-16 78 75 115 27-16 79 27-16 79 76 116 27-16 80 27-16 80 77 117 27-16 81 27-16 81 78 118 27-16 82 27-16 82 79 119 27-16 83 27-16 83 80 120 27-16 84 27-16 84 81 121 27-16 85 27-16 85 82 122 27-16 86 27-16 86 83 123 27-16 87 27-16 87 84 124 27-16 88 27-16 88 85 125 27-16 89 27-16 89 86 126 27-16 90 27-16 90 87 127 27-16 91 27-16 91 88 128 27-16 92 27-16 92 89 129 27-16 93 27-16 93 90 130 27-16 94 27-16 94 91 131 27-16 95 27-16 95 92 132 27-16 96 27-16 96 93 133 27-16 27-16 97 94 134 27-16 27-16 98 95 135 27-16 27-16 99 96 136 27-16 27-16 100 97 137 27-16 . 51 23 52 24 26 27 31 2222
+**Como usar uma API Key**
+
+**1. Obtenha uma Chave API**
+
+As chaves API são geralmente fornecidas pelo provedor da API quando você cria uma conta ou se inscreve para um serviço.
+
+**2. Armazene a Chave API com Segurança**
+
+Guarde sua chave API com segurança, pois ela dá acesso à sua conta e recursos. Evite armazená-la em texto simples ou em código público.
+
+**3. Autentique-se**
+
+Ao fazer uma chamada de API, você precisa autenticar seu aplicativo usando a chave API. Isso geralmente é feito enviando a chave como um cabeçalho "Authorization" ou como um parâmetro de consulta.
+
+**4. Escolha o Método de Autenticação**
+
+Existem vários métodos para enviar uma chave API:
+
+* **Cabeçalho de Autorização:** `Authorization: Bearer {chave_api}`
+* **Parâmetro de Consulta:** `?api_key={chave_api}`
+* **Parâmetro de URL:** `/api/endpoint?api_key={chave_api}`
+
+**5. Reutilize a Chave API**
+
+Uma vez que sua chave API esteja autenticada, ela pode ser reutilizada para várias chamadas, desde que seja válida.
+
+**6. Gere uma Nova Chave API (Opcional)**
+
+Se sua chave API for comprometida, você poderá gerar uma nova chave do painel do provedor de API.
+
+**7. Desative Chave API Antiga (Opcional)**
+
+Depois de gerar uma nova chave API, desative a antiga para evitar uso não autorizado.
+
+**Exemplo:**
+
+**Chave API armazenada em uma variável de ambiente:**
+
+```
+export API_KEY="minhasuperchaveapi123"
+```
+
+**Autenticação usando um cabeçalho de autorização:**
+
+```
+import requests
+
+# Crie um cabeçalho com a chave API
+headers = {"Authorization": "Bearer " + API_KEY}
+
+# Faça uma chamada de API
+response = requests.get("https://api.exemplo.com/endpoint", headers=headers)
+```
+
+**Autenticação usando um parâmetro de consulta:**
+
+```
+import requests
+
+# Adicione a chave API como um parâmetro de consulta
+params = {"api_key": API_KEY}
+
+# Faça uma chamada de API
+response = requests.get("https://api.exemplo.com/endpoint", params=params)
+```
 ###########
