@@ -54,9 +54,9 @@ jobs:
           result-encoding: string
           script: |
             const content = ${{ steps.read-file.outputs.content }}
-            github.rest.issues.createComment({
+            github.issues.createComment({
               issue_number: context.issue.number,
-              body: 'content'
+              body: content
             })
 
       # - name: "Commit changes"
