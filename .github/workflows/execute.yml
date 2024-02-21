@@ -52,13 +52,10 @@ jobs:
         id: add-comment
         with:
           result-encoding: string
-          script: |
-            const content = ${{ steps.read-file.outputs.content }}
-            console.log(content)
+          script: const content = ${{ steps.read-file.outputs.content }}
 
       - name: 'Close issue: prompt showed!'
         uses: peter-evans/close-issue@v2
-        if: steps.add-comment.outcome == 'success'
         with:
           comment: |
             Closing issue with success run
