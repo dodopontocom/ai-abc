@@ -51,14 +51,12 @@ jobs:
         if: steps.read-file.outcome == 'success'
         id: add-comment
         with:
+          result-encoding: string
           script: |
             const content = ${{ steps.read-file.outputs.content }}
-            #const lines = content.split("\n")
-            #const summary = lines.slice(0, 3).join("\n")
-
             github.rest.issues.createComment({
               issue_number: context.issue.number,
-              body: content
+              body: 'content'
             })
 
       # - name: "Commit changes"
