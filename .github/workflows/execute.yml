@@ -32,27 +32,49 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v3
      
-      - name: 'show prompt'
-        id: status
+      - name: build prompt
+        id: run
         continue-on-error: true
         env:
           prompt: ${{ fromJson(needs.issue-to-json.outputs.payload-parsed)['prompt'] }}
-        run: bash ./gemini.sh "${prompt}" "${{ secrets.GEMINI_API_KEY }}"
+        run: bash ./gemini.sh "${prompt}" "${{ secrets.GEMINI_API_KEY }}" > ./generated.txt
 
-      - name: "Commit changes"
-        uses: EndBug/add-and-commit@v9
-        if: steps.status.outcome == 'success'
+      - name: preload file
+        uses: actions/github-actions/read-file@v1
+        if: steps.run.outcome == 'success'
+        id: read-file
         with:
-          message: new code
-          committer_name: GitHub Actions
-          committer_email: actions@github.com
+          path: "./generated.txt"
+
+      - name:
+        uses: actions/github-script@v6
+        if: steps.read-file.outcome == 'success'
+        id: add-comment
+        with:
+          script: |
+            const content = ${{ steps.read-file.outputs.content }}
+            const lines = content.split("\n")
+            const summary = lines.slice(0, 3).join("\n")
+
+            github.issues.createComment({
+              issue_number: ${{ github.event.issue.number }},
+              body: summary
+            })
+
+      # - name: "Commit changes"
+      #   uses: EndBug/add-and-commit@v9
+      #   if: steps.run.outcome == 'success'
+      #   with:
+      #     message: new code
+      #     committer_name: GitHub Actions
+      #     committer_email: actions@github.com
 
       - name: 'Close issue: prompt showed!'
         uses: peter-evans/close-issue@v2
-        if: steps.status.outcome == 'success'
+        if: steps.add-comment.outcome == 'success'
         with:
           comment: |
-            Closing issue with success status
+            Closing issue with success run
             Reason: prompt ok
           labels: |
             prompt_showed
