@@ -12,6 +12,4 @@ curl --silent -H 'Content-Type: application/json' \
   | jq -r '.candidates[0].content.parts[0].text'
 ")
 
-echo "###########"
 eval ${CONTENT}
-echo "###########"
