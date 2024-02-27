@@ -2,7 +2,7 @@
 
 # create commit message
 # git config --global alias.cm '!python ~/ccm.py | git commit -a -F -'
-# GEMINI API KEY ---> https://aistudio.google.com/app/apikey
+
 
 import sys, os, subprocess
 import google.generativeai as genai
@@ -25,7 +25,7 @@ o commit (usar aproximadamente 30 palavras e usar frases impessoais, se possíve
 '''
 
 def generate_git_commit_message():
-	git_changes = subprocess.run(["git", "diff", "--cached"], capture_output=True, text=True)
+	git_changes = subprocess.run(["git", "diff"], capture_output=True, text=True)
 	message = model.generate_content(prompt	+ str(git_changes))
 	return message
 	
