@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 # create commit message
+# git config --global alias.cm '!python ~/ccm.py | git commit -F -'
 
 import sys, os
 import subprocess
@@ -17,12 +18,15 @@ else:
 genai.configure(api_key=(key))
 model = genai.GenerativeModel('gemini-pro')
 
+prompt = '''
+Voce é um expert em criação de mensagens para commits no github 
+para as mudanças relacionadas as alterações. Aqui está um diff das mudanças e preciso de uma mensagem para
+o commit (usar aproximadamente 30 palavras e usar frases impessoais): 
+'''
+
 def generate_git_commit_message():
 	git_changes = subprocess.run(["git", "diff", "--cached"], capture_output=True, text=True)
-	message = model.generate_content('''Voce é um expert em criando mensagens para commites no github 
-		para as mudanças relacionadas. Aqui está um diff das mudanças e preciso de uma mensagem para
-		o commit (usar aproximadamente 30 palavras e usar frases impessoais): ''' 
-		+ str(git_changes))
+	message = model.generate_content(prompt	+ str(git_changes))
 	return message
 	
 if __name__ == '__main__':
