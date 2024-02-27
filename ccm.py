@@ -14,8 +14,8 @@ model = genai.GenerativeModel('gemini-pro')
 def generate_git_commit_message():
 
 	git_changes = subprocess.run(["git", "diff", "--cached"], capture_output=True, text=True)
-	message = model.generate_content('''You are an expert at creating a github commit message 
-		for a set of changes. Here is a diff of changes we need a commit message for (use around 30 words): ''' 
+	message = model.generate_content('''Voce é um expert em criando mensagens para commites no github 
+		para as mudanças relacionadas. Aqui está um diff das mudanças e preciso de uma mensagem para o commit (usar aproximadamente 30 palavras): ''' 
 		+ str(git_changes))
 	return message
 	
