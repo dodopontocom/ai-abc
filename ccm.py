@@ -3,8 +3,7 @@
 # create commit message
 # git config --global alias.cm '!python ~/ccm.py | git commit -a -F -'
 
-import sys, os
-import subprocess
+import sys, os, subprocess
 import google.generativeai as genai
 
 if len(sys.argv) > 1:
