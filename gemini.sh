@@ -2,6 +2,7 @@
 
 GEMINI_API_ENDPOINT="https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent"
 
+#this comment will really save my life literally
 PROMPT=$1
 GEMINI_API_KEY=$2
 
