@@ -2,6 +2,7 @@
 
 # create commit message
 # git config --global alias.cm '!python ~/ccm.py | git commit -a -F -'
+# GEMINI API KEY ---> https://aistudio.google.com/app/apikey
 
 import sys, os, subprocess
 import google.generativeai as genai
