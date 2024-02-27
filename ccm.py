@@ -21,7 +21,7 @@ model = genai.GenerativeModel('gemini-pro')
 prompt = '''
 Voce é um expert em criação de mensagens para commits no github.
 Aqui está um diff das mudanças e preciso de uma mensagem para
-o commit (usar aproximadamente 30 palavras e usar frases impessoais, possível usar a metodologia "Conventional Commits"): 
+o commit (usar aproximadamente 30 palavras e usar frases impessoais, se possível usar a metodologia "Conventional Commits"): 
 '''
 
 def generate_git_commit_message():
