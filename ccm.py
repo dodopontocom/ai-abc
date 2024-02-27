@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 # create commit message
-# git config --global alias.cm '!python ~/ccm.py | git commit -F -'
+# git config --global alias.cm '!python ~/ccm.py | git commit -a -F -'
 
 import sys, os
 import subprocess
