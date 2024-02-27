@@ -19,8 +19,8 @@ genai.configure(api_key=(key))
 model = genai.GenerativeModel('gemini-pro')
 
 prompt = '''
-Voce é um expert em criação de mensagens para commits no github 
-para as mudanças relacionadas as alterações. Aqui está um diff das mudanças e preciso de uma mensagem para
+Voce é um expert em criação de mensagens para commits no github.
+Aqui está um diff das mudanças e preciso de uma mensagem para
 o commit (usar aproximadamente 30 palavras e usar frases impessoais): 
 '''
 
