@@ -14,5 +14,8 @@ body:
       label: ">>prompt<<"
       description: Envie uma mensagem ao gemini
       placeholder: Ola, como vai você hoje?
+      label: ">>teste_123<<"
+      description: Envie uma mensagem ao gemini
+      placeholder: Ola, como vai você hoje?
     validations:
       required: true
