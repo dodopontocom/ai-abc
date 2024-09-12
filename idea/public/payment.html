@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stripe Payment</title>
+    <title>Pagamento</title>
     <script src="https://js.stripe.com/v3/"></script> <!-- Inclui Stripe.js -->
     <style>
         body {
@@ -22,6 +22,7 @@
             padding: 2rem;
             width: 100%;
             max-width: 400px;
+            position: relative;
         }
         h2 {
             margin: 0 0 1.5rem;
@@ -51,6 +52,20 @@
         button:hover {
             background-color: #4353b3;
         }
+        #progress-bar-container {
+            display: none;
+            margin-top: 1rem;
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        #progress-bar {
+            height: 100%;
+            background-color: #5469d4;
+            width: 0%;
+            transition: width 0.5s ease;
+        }
         #payment-result {
             margin-top: 1rem;
             text-align: center;
@@ -66,7 +81,7 @@
 </head>
 <body>
     <div class="container">
-        <h2>Pay with Stripe</h2>
+        <h2>Pagar com Stripe</h2>
         <form id="payment-form">
             <label for="card-number">Card Number</label>
             <div id="card-number"></div> <!-- Campo para o número do cartão -->
@@ -78,6 +93,9 @@
             <div id="card-cvc"></div> <!-- Campo para o CVC -->
             
             <button type="submit" id="pay-button">Pay</button>
+            <div id="progress-bar-container">
+                <div id="progress-bar"></div>
+            </div>
             <div id="payment-result"></div>
             <div id="countdown" style="display: none;"></div> <!-- Área para exibir a contagem regressiva -->
         </form>
@@ -89,7 +107,7 @@
             const config = await response.json();
             return config.publicKey;
         }
-    
+
         getStripePublicKey().then(publicKey => {
             const stripe = Stripe(publicKey);
             const elements = stripe.elements();
@@ -105,6 +123,8 @@
 
             const form = document.getElementById('payment-form');
             const payButton = document.getElementById('pay-button');
+            const progressBarContainer = document.getElementById('progress-bar-container');
+            const progressBar = document.getElementById('progress-bar');
             const countdownDiv = document.getElementById('countdown');
 
             const urlParams = new URLSearchParams(window.location.search);
@@ -123,6 +143,33 @@
             form.addEventListener('submit', async (event) => {
                 event.preventDefault();
 
+                progressBarContainer.style.display = 'block'; // Exibe a barra de progresso
+                payButton.disabled = true; // Desabilita o botão
+                let progress = 0;
+                let intervalTime = 200; // Tempo entre atualizações (ms)
+
+                // Função para atualizar a cor da barra de progresso
+                function updateProgressBarColor() {
+                    if (progress >= 90) {
+                        progressBar.style.backgroundColor = '#ff9900'; // Laranja para 90%
+                    } else if (progress >= 50) {
+                        progressBar.style.backgroundColor = '#ff6600'; // Laranja escuro para 50%
+                    } else {
+                        progressBar.style.backgroundColor = '#5469d4'; // Azul padrão
+                    }
+                }
+
+                // Simula o carregamento da barra de progresso
+                const simulateProgress = async () => {
+                    while (progress < 100) {
+                        progress += 10; // Incrementa o progresso
+                        progressBar.style.width = `${progress}%`;
+                        updateProgressBarColor(); // Atualiza a cor com base no progresso
+                        await new Promise(resolve => setTimeout(resolve, intervalTime)); // Espera antes de atualizar a barra
+                    }
+                };
+
+                const startTime = Date.now();
                 const response = await fetch('/create-payment-intent', {
                     method: 'POST',
                     headers: {
@@ -144,6 +191,9 @@
                     return;
                 }
 
+                // Simula o progresso de carregamento enquanto espera a confirmação do pagamento
+                await simulateProgress();
+
                 const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
                     payment_method: {
                         card: cardNumber
@@ -154,13 +204,15 @@
                 if (error) {
                     resultDiv.textContent = `Error: ${error.message}`;
                     resultDiv.style.color = 'red';
+                    payButton.disabled = false; // Reabilita o botão
                 } else if (paymentIntent.status === 'succeeded') {
                     resultDiv.textContent = 'Payment successful!';
                     resultDiv.style.color = 'green';
+                    progressBar.style.backgroundColor = 'green'; // Altera a cor da barra de progresso
 
-                    // Exibe a contagem regressiva e redireciona após 3 segundos
+                    // Exibe a contagem regressiva e redireciona após 5 segundos
                     countdownDiv.style.display = 'block';
-                    let countdown = 3;
+                    let countdown = 5;
                     countdownDiv.textContent = `Redirecting in ${countdown} seconds...`;
 
                     const countdownInterval = setInterval(() => {
