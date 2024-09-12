@@ -64,7 +64,7 @@
             height: 100%;
             background-color: #5469d4;
             width: 0%;
-            transition: width 0.2s ease;
+            transition: width 0.5s ease;
         }
         #payment-result {
             margin-top: 1rem;
@@ -146,15 +146,18 @@
                 progressBarContainer.style.display = 'block'; // Exibe a barra de progresso
                 payButton.disabled = true; // Desabilita o botão
                 let progress = 0;
-                
-                const progressInterval = setInterval(() => {
-                    progress += 10; // Incrementa o progresso
-                    progressBar.style.width = `${progress}%`;
-                    if (progress >= 100) {
-                        clearInterval(progressInterval);
-                    }
-                }, 200); // Atualiza a barra a cada 200ms
+                let intervalTime = 200; // Tempo entre atualizações (ms)
 
+                // Simula o carregamento da barra de progresso
+                const simulateProgress = async () => {
+                    while (progress < 100) {
+                        progress += 10; // Incrementa o progresso
+                        progressBar.style.width = `${progress}%`;
+                        await new Promise(resolve => setTimeout(resolve, intervalTime)); // Espera antes de atualizar a barra
+                    }
+                };
+
+                const startTime = Date.now();
                 const response = await fetch('/create-payment-intent', {
                     method: 'POST',
                     headers: {
@@ -176,6 +179,9 @@
                     return;
                 }
 
+                // Simula o progresso de carregamento enquanto espera a confirmação do pagamento
+                await simulateProgress();
+
                 const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
                     payment_method: {
                         card: cardNumber
@@ -192,9 +198,9 @@
                     resultDiv.style.color = 'green';
                     progressBar.style.backgroundColor = 'green'; // Altera a cor da barra de progresso
 
-                    // Exibe a contagem regressiva e redireciona após 3 segundos
+                    // Exibe a contagem regressiva e redireciona após 5 segundos
                     countdownDiv.style.display = 'block';
-                    let countdown = 3;
+                    let countdown = 5;
                     countdownDiv.textContent = `Redirecting in ${countdown} seconds...`;
 
                     const countdownInterval = setInterval(() => {
