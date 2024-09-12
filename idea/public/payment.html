@@ -22,6 +22,7 @@
             padding: 2rem;
             width: 100%;
             max-width: 400px;
+            position: relative;
         }
         h2 {
             margin: 0 0 1.5rem;
@@ -51,6 +52,20 @@
         button:hover {
             background-color: #4353b3;
         }
+        #progress-bar-container {
+            display: none;
+            margin-top: 1rem;
+            height: 10px;
+            background-color: #ddd;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        #progress-bar {
+            height: 100%;
+            background-color: #5469d4;
+            width: 0%;
+            transition: width 0.2s ease;
+        }
         #payment-result {
             margin-top: 1rem;
             text-align: center;
@@ -78,6 +93,9 @@
             <div id="card-cvc"></div> <!-- Campo para o CVC -->
             
             <button type="submit" id="pay-button">Pay</button>
+            <div id="progress-bar-container">
+                <div id="progress-bar"></div>
+            </div>
             <div id="payment-result"></div>
             <div id="countdown" style="display: none;"></div> <!-- Área para exibir a contagem regressiva -->
         </form>
@@ -89,7 +107,7 @@
             const config = await response.json();
             return config.publicKey;
         }
-    
+
         getStripePublicKey().then(publicKey => {
             const stripe = Stripe(publicKey);
             const elements = stripe.elements();
@@ -105,6 +123,8 @@
 
             const form = document.getElementById('payment-form');
             const payButton = document.getElementById('pay-button');
+            const progressBarContainer = document.getElementById('progress-bar-container');
+            const progressBar = document.getElementById('progress-bar');
             const countdownDiv = document.getElementById('countdown');
 
             const urlParams = new URLSearchParams(window.location.search);
@@ -122,6 +142,18 @@
 
             form.addEventListener('submit', async (event) => {
                 event.preventDefault();
+
+                progressBarContainer.style.display = 'block'; // Exibe a barra de progresso
+                payButton.disabled = true; // Desabilita o botão
+                let progress = 0;
+                
+                const progressInterval = setInterval(() => {
+                    progress += 10; // Incrementa o progresso
+                    progressBar.style.width = `${progress}%`;
+                    if (progress >= 100) {
+                        clearInterval(progressInterval);
+                    }
+                }, 200); // Atualiza a barra a cada 200ms
 
                 const response = await fetch('/create-payment-intent', {
                     method: 'POST',
@@ -154,9 +186,11 @@
                 if (error) {
                     resultDiv.textContent = `Error: ${error.message}`;
                     resultDiv.style.color = 'red';
+                    payButton.disabled = false; // Reabilita o botão
                 } else if (paymentIntent.status === 'succeeded') {
                     resultDiv.textContent = 'Payment successful!';
                     resultDiv.style.color = 'green';
+                    progressBar.style.backgroundColor = 'green'; // Altera a cor da barra de progresso
 
                     // Exibe a contagem regressiva e redireciona após 3 segundos
                     countdownDiv.style.display = 'block';
