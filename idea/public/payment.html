@@ -148,11 +148,23 @@
                 let progress = 0;
                 let intervalTime = 200; // Tempo entre atualizações (ms)
 
+                // Função para atualizar a cor da barra de progresso
+                function updateProgressBarColor() {
+                    if (progress >= 90) {
+                        progressBar.style.backgroundColor = '#ff9900'; // Laranja para 90%
+                    } else if (progress >= 50) {
+                        progressBar.style.backgroundColor = '#ff6600'; // Laranja escuro para 50%
+                    } else {
+                        progressBar.style.backgroundColor = '#5469d4'; // Azul padrão
+                    }
+                }
+
                 // Simula o carregamento da barra de progresso
                 const simulateProgress = async () => {
                     while (progress < 100) {
                         progress += 10; // Incrementa o progresso
                         progressBar.style.width = `${progress}%`;
+                        updateProgressBarColor(); // Atualiza a cor com base no progresso
                         await new Promise(resolve => setTimeout(resolve, intervalTime)); // Espera antes de atualizar a barra
                     }
                 };
