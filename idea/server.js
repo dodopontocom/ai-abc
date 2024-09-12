@@ -1,8 +1,16 @@
 const express = require('express');
-const stripe = require('./config'); // Importa a configuração do Stripe
+//const stripe = require('./config'); // Importa a configuração do Stripe
 const app = express();
 const bodyParser = require('body-parser');
 require('dotenv').config();
+
+const { stripeSecretKey, stripePublicKey } = require('./config');
+const stripe = require('stripe')(stripeSecretKey); // Inicializa o Stripe com a chave secreta
+
+app.get('/config', (req, res) => {
+  res.json({ publicKey: stripePublicKey }); // Envia a chave pública para o front-end
+});
+
 
 const path = require('path');
 
@@ -29,7 +37,7 @@ app.post('/create-payment-intent', async (req, res) => {
 });
 
 app.get('/config', (req, res) => {
-  res.json({ publicKey: process.env.STRIPE_PUBLIC_KEY });
+  res.json({ publicKey: stripePublicKey });
 });
 
 // Serve arquivos estáticos da pasta 'public'

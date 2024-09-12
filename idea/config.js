@@ -1,4 +1,6 @@
-// config.js
-require('dotenv').config(); // Carrega variáveis do .env
-const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY);
-module.exports = stripe;
+require('dotenv').config();
+
+module.exports = {
+    stripeSecretKey: process.env.STRIPE_SECRET_KEY,
+    stripePublicKey: process.env.STRIPE_PUBLIC_KEY,
+};
