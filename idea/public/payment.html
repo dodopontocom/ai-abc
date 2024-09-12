@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stripe Payment</title>
+    <script src="https://js.stripe.com/v3/"></script> <!-- Inclui Stripe.js -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 {
+            margin: 0 0 1.5rem;
+            color: #333;
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+        #card-number, #card-expiry, #card-cvc {
+            margin-bottom: 1rem;
+        }
+        button {
+            background-color: #5469d4;
+            color: #ffffff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        button:hover {
+            background-color: #4353b3;
+        }
+        #payment-result {
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: bold;
+        }
+        #countdown {
+            margin-top: 1rem;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Pay with Stripe</h2>
+        <form id="payment-form">
+            <label for="card-number">Card Number</label>
+            <div id="card-number"></div> <!-- Campo para o número do cartão -->
+            
+            <label for="card-expiry">Expiration Date</label>
+            <div id="card-expiry"></div> <!-- Campo para a data de expiração -->
+            
+            <label for="card-cvc">CVC</label>
+            <div id="card-cvc"></div> <!-- Campo para o CVC -->
+            
+            <button type="submit" id="pay-button">Pay</button>
+            <div id="payment-result"></div>
+            <div id="countdown" style="display: none;"></div> <!-- Área para exibir a contagem regressiva -->
+        </form>
+    </div>
+
+    <script>
+        async function getStripePublicKey() {
+            const response = await fetch('/config');
+            const config = await response.json();
+            return config.publicKey;
+        }
+    
+        getStripePublicKey().then(publicKey => {
+            const stripe = Stripe(publicKey);
+            const elements = stripe.elements();
+            
+            const cardNumber = elements.create('cardNumber');
+            cardNumber.mount('#card-number');
+
+            const cardExpiry = elements.create('cardExpiry');
+            cardExpiry.mount('#card-expiry');
+
+            const cardCvc = elements.create('cardCvc');
+            cardCvc.mount('#card-cvc');
+
+            const form = document.getElementById('payment-form');
+            const payButton = document.getElementById('pay-button');
+            const countdownDiv = document.getElementById('countdown');
+
+            const urlParams = new URLSearchParams(window.location.search);
+            const amount = urlParams.get('amount');
+            const amountInCents = Math.round(amount * 100); // Converte para centavos
+
+            // Formata o valor para exibição com duas casas decimais
+            const formatter = new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL',
+            });
+
+            // Atualiza o texto do botão com o valor formatado
+            payButton.textContent = `Pay ${formatter.format(amount)}`;
+
+            form.addEventListener('submit', async (event) => {
+                event.preventDefault();
+
+                const response = await fetch('/create-payment-intent', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ amount: amountInCents })
+                });
+
+                if (!response.ok) {
+                    console.error('Error fetching payment intent:', await response.text());
+                    return;
+                }
+
+                const data = await response.json();
+                const { clientSecret } = data;
+
+                if (!clientSecret) {
+                    console.error('Client secret is undefined');
+                    return;
+                }
+
+                const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
+                    payment_method: {
+                        card: cardNumber
+                    }
+                });
+
+                const resultDiv = document.getElementById('payment-result');
+                if (error) {
+                    resultDiv.textContent = `Error: ${error.message}`;
+                    resultDiv.style.color = 'red';
+                } else if (paymentIntent.status === 'succeeded') {
+                    resultDiv.textContent = 'Payment successful!';
+                    resultDiv.style.color = 'green';
+
+                    // Exibe a contagem regressiva e redireciona após 3 segundos
+                    countdownDiv.style.display = 'block';
+                    let countdown = 3;
+                    countdownDiv.textContent = `Redirecting in ${countdown} seconds...`;
+
+                    const countdownInterval = setInterval(() => {
+                        countdown -= 1;
+                        countdownDiv.textContent = `Redirecting in ${countdown} seconds...`;
+                        if (countdown <= 0) {
+                            clearInterval(countdownInterval);
+                            window.location.href = '/success';
+                        }
+                    }, 1000);
+                }
+            });
+        }).catch(error => {
+            console.error('Error fetching Stripe public key:', error);
+        });
+    </script>
+</body>
+</html>

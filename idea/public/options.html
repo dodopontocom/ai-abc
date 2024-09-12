@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Amount</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            width: 100%;
+            max-width: 600px;
+        }
+        h1 {
+            margin: 0 0 1.5rem;
+            color: #333;
+            text-align: center;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+        .product {
+            background: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .product label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .product span {
+            display: block;
+            margin: 0.5rem 0;
+            color: #555;
+        }
+        .product input[type="checkbox"] {
+            margin-right: 0.5rem;
+        }
+        button {
+            background-color: #5469d4;
+            color: #ffffff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        button:hover {
+            background-color: #4353b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Select an Amount</h1>
+        <form action="payment.html" method="get">
+            <div class="product-grid">
+                <div class="product">
+                    <label>
+                        <input type="checkbox" name="amount" value="10.50"> Product 1 🌟
+                        <span>R$ 10,50</span>
+                    </label>
+                </div>
+                <div class="product">
+                    <label>
+                        <input type="checkbox" name="amount" value="20.99"> Product 2 🚀
+                        <span>R$ 20,99</span>
+                    </label>
+                </div>
+                <div class="product">
+                    <label>
+                        <input type="checkbox" name="amount" value="30.99"> Product 3 🛒
+                        <span>R$ 30,99</span>
+                    </label>
+                </div>
+                <div class="product">
+                    <label>
+                        <input type="checkbox" name="amount" value="40.65"> Product 4 🎉
+                        <span>R$ 40,65</span>
+                    </label>
+                </div>
+                <div class="product">
+                    <label>
+                        <input type="checkbox" name="amount" value="50.99"> Product 5 💎
+                        <span>R$ 50,99</span>
+                    </label>
+                </div>
+                <div class="product">
+                    <label>
+                        <input type="checkbox" name="amount" value="60.01"> Product 6 🎁
+                        <span>R$ 60,01</span>
+                    </label>
+                </div>
+            </div>
+            <button type="submit">Proceed to Payment</button>
+        </form>
+    </div>
+    <script>
+        // Script para garantir que um valor seja selecionado
+        document.getElementById('product-form').addEventListener('submit', function(e) {
+            const selectedProduct = document.querySelector('input[name="amount"]:checked');
+            if (!selectedProduct) {
+                e.preventDefault(); // Impede o envio do formulário
+                alert('Please select a product before proceeding.');
+            }
+        });
+    </script>
+</body>
+</html>

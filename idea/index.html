@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stripe Payment</title>
+    <script src="https://js.stripe.com/v3/"></script> <!-- Inclui Stripe.js -->
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 {
+            margin: 0 0 1.5rem;
+            color: #333;
+            text-align: center;
+        }
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #555;
+        }
+        #card-number, #card-expiry, #card-cvc {
+            margin-bottom: 1rem;
+        }
+        .input-error {
+            border: 1px solid red;
+        }
+        .input-valid {
+            border: 1px solid green;
+        }
+        .error-message {
+            color: red;
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+        button {
+            background-color: #5469d4;
+            color: #ffffff;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        button:hover {
+            background-color: #4353b3;
+        }
+        #payment-result {
+            margin-top: 1rem;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Pay with Stripe</h2>
+        <form id="payment-form">
+            <label for="card-number">Card Number</label>
+            <div id="card-number"></div> <!-- Campo para o número do cartão -->
+            <div id="card-number-error" class="error-message"></div>
+            
+            <label for="card-expiry">Expiration Date</label>
+            <div id="card-expiry"></div> <!-- Campo para a data de expiração -->
+            <div id="card-expiry-error" class="error-message"></div>
+            
+            <label for="card-cvc">CVC</label>
+            <div id="card-cvc"></div> <!-- Campo para o CVC -->
+            <div id="card-cvc-error" class="error-message"></div>
+            
+            <button type="submit">Pay R$ 250.00</button>
+            <div id="payment-result"></div>
+        </form>
+    </div>
+
+    <script>
+        const stripe = Stripe('pk_test_51IWht9KAZvcZ1kzhMFeGzRckQNF1XHE0zybzVFky29oIWVkT39kSfboVLgA4b6GmtDM1QtdA7gSmXIHzGFgmeTZa00ZQjqAvtV'); // Substitua pela sua chave pública
+        const elements = stripe.elements();
+        
+        const cardNumber = elements.create('cardNumber');
+        cardNumber.mount('#card-number');
+
+        const cardExpiry = elements.create('cardExpiry');
+        cardExpiry.mount('#card-expiry');
+
+        const cardCvc = elements.create('cardCvc');
+        cardCvc.mount('#card-cvc');
+
+        const cardNumberError = document.getElementById('card-number-error');
+        const cardExpiryError = document.getElementById('card-expiry-error');
+        const cardCvcError = document.getElementById('card-cvc-error');
+
+        // Adiciona eventos de validação
+        cardNumber.addEventListener('change', function(event) {
+            if (event.error) {
+                cardNumberError.textContent = event.error.message;
+                cardNumberError.style.display = 'block';
+                cardNumber.element.classList.add('input-error');
+            } else {
+                cardNumberError.textContent = '';
+                cardNumberError.style.display = 'none';
+                cardNumber.element.classList.remove('input-error');
+                cardNumber.element.classList.add('input-valid');
+            }
+        });
+
+        cardExpiry.addEventListener('change', function(event) {
+            if (event.error) {
+                cardExpiryError.textContent = event.error.message;
+                cardExpiryError.style.display = 'block';
+                cardExpiry.element.classList.add('input-error');
+            } else {
+                cardExpiryError.textContent = '';
+                cardExpiryError.style.display = 'none';
+                cardExpiry.element.classList.remove('input-error');
+                cardExpiry.element.classList.add('input-valid');
+            }
+        });
+
+        cardCvc.addEventListener('change', function(event) {
+            if (event.error) {
+                cardCvcError.textContent = event.error.message;
+                cardCvcError.style.display = 'block';
+                cardCvc.element.classList.add('input-error');
+            } else {
+                cardCvcError.textContent = '';
+                cardCvcError.style.display = 'none';
+                cardCvc.element.classList.remove('input-error');
+                cardCvc.element.classList.add('input-valid');
+            }
+        });
+
+        const form = document.getElementById('payment-form');
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const response = await fetch('/create-payment-intent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ amount: 250000 }) // Manda o valor em centavos ($50.00)
+            });
+
+            const { clientSecret } = await response.json(); // Obtém o clientSecret do back-end
+
+            const { paymentIntent, error } = await stripe.confirmCardPayment(clientSecret, {
+                payment_method: {
+                    card: cardNumber // Usamos apenas o cardNumber aqui, o Stripe já entende os outros campos.
+                }
+            });
+
+            const resultDiv = document.getElementById('payment-result');
+            if (error) {
+                resultDiv.textContent = `Error: ${error.message}`;
+                resultDiv.style.color = 'red';
+            } else if (paymentIntent.status === 'succeeded') {
+                resultDiv.textContent = 'Payment successful!';
+                resultDiv.style.color = 'green';
+            }
+        });
+    </script>
+</body>
+</html>
