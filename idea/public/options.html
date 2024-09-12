@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Choose Amount</title>
+    <title>Produtos</title>
     <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -64,6 +64,12 @@
             cursor: pointer;
             width: 100%;
             transition: background-color 0.2s ease;
+            opacity: 0.5; /* Inicia com o botão desabilitado */
+            pointer-events: none; /* Desabilita interações */
+        }
+        button.enabled {
+            opacity: 1; /* Habilita a visibilidade */
+            pointer-events: auto; /* Permite interações */
         }
         button:hover {
             background-color: #4353b3;
@@ -72,58 +78,70 @@
 </head>
 <body>
     <div class="container">
-        <h1>Select an Amount</h1>
-        <form action="payment.html" method="get">
+        <h1>Selecione um produto</h1>
+        <form id="product-form" action="payment.html" method="get">
             <div class="product-grid">
                 <div class="product">
                     <label>
-                        <input type="checkbox" name="amount" value="10.50"> Product 1 🌟
+                        <input type="checkbox" name="amount" value="10.50"> Sol 🌟
                         <span>R$ 10,50</span>
                     </label>
                 </div>
                 <div class="product">
                     <label>
-                        <input type="checkbox" name="amount" value="20.99"> Product 2 🚀
+                        <input type="checkbox" name="amount" value="20.99"> Foguete 🚀
                         <span>R$ 20,99</span>
                     </label>
                 </div>
                 <div class="product">
                     <label>
-                        <input type="checkbox" name="amount" value="30.99"> Product 3 🛒
+                        <input type="checkbox" name="amount" value="30.99"> Mercado 🛒
                         <span>R$ 30,99</span>
                     </label>
                 </div>
                 <div class="product">
                     <label>
-                        <input type="checkbox" name="amount" value="40.65"> Product 4 🎉
+                        <input type="checkbox" name="amount" value="40.65"> Festa 🎉
                         <span>R$ 40,65</span>
                     </label>
                 </div>
                 <div class="product">
                     <label>
-                        <input type="checkbox" name="amount" value="50.99"> Product 5 💎
-                        <span>R$ 50,99</span>
+                        <input type="checkbox" name="amount" value="50000.99"> Diamante 💎
+                        <span>R$ 50000,99</span>
                     </label>
                 </div>
                 <div class="product">
                     <label>
-                        <input type="checkbox" name="amount" value="60.01"> Product 6 🎁
+                        <input type="checkbox" name="amount" value="60.01"> Surpresa 🎁
                         <span>R$ 60,01</span>
                     </label>
                 </div>
             </div>
-            <button type="submit">Proceed to Payment</button>
+            <button type="submit" id="submit-button" disabled>Continuar para Pagamento</button>
         </form>
     </div>
     <script>
-        // Script para garantir que um valor seja selecionado
-        document.getElementById('product-form').addEventListener('submit', function(e) {
-            const selectedProduct = document.querySelector('input[name="amount"]:checked');
-            if (!selectedProduct) {
-                e.preventDefault(); // Impede o envio do formulário
-                alert('Please select a product before proceeding.');
+        // Função para habilitar/desabilitar o botão
+        function toggleSubmitButton() {
+            const button = document.getElementById('submit-button');
+            const checkboxes = document.querySelectorAll('input[name="amount"]');
+            const anyChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+            button.disabled = !anyChecked;
+            if (anyChecked) {
+                button.classList.add('enabled');
+            } else {
+                button.classList.remove('enabled');
             }
+        }
+
+        // Adiciona listeners aos checkboxes
+        document.querySelectorAll('input[name="amount"]').forEach(checkbox => {
+            checkbox.addEventListener('change', toggleSubmitButton);
         });
+
+        // Inicializa o estado do botão na carga da página
+        toggleSubmitButton();
     </script>
 </body>
 </html>
