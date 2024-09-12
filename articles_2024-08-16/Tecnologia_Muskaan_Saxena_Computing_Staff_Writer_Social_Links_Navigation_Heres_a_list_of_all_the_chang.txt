@@ -1,0 +1,14 @@
+Título: Here’s a list of all the changes coming to your Chromebook with ChromeOS 127 now rolling out
+URL: https://www.techradar.com/computing/chromebooks/heres-a-list-of-all-the-changes-coming-to-your-chromebook-with-chromeos-127-now-rolling-out
+
+ChromeOS 127 is now rolling out to Chromebooks and introduces some minor but important changes that aim to improve accessibility options and deliver productivity boosts. While the update may not be the flashiest, it is always good to see a company continuously upgrade its accessibility options.
+So, ahead, we’ve listed the most interesting changes coming to your Chromebook at some point over the next few weeks.
+
+We’ll start with one of our favorite upgrades in ChromeOS 127, improved PDF accessibility in the Chromebook Gallery App. This comes courtesy of an AI-powered OCR reader (Optical Character Recognition) that makes PDFs more accessible to low-vision or blind users. Essentially, this feature cleverly organizes the PDF to make it easier for users to understand via ChromeVox, the built-in screen reader for Chromebooks.
+
+You’ll also notice a new feature called Read Aloud in Chrome’s Reading mode. As the name suggests, this feature facilitates having content in the web browser read out to the user. This is helpful to visually impaired users and those who need help understanding long-form articles.
+Personally, this would be perfect for those long research nights when I need to read huge blocks of text while taking notes or even just to make it easier to listen to my favorite articles or stories while I multitask.
+Regarding productivity boosts, the Gallery app has another update that will let you delete or reorder pages of your PDF documents with keyboard and mouse shortcuts. Chromebook users with Bluetooth headsets should note that ChromeOS 127 finally adds support for call control buttons on compatible hardware - so that’s great news, assuming your headset has the capability.
+Finally, Chromebook users will doubtless be pleased to learn that the Firmware Update App has been tweaked to offer clearer instructions for updating their peripherals. Additionally, the Classroom Glanceables widget will let you quickly view and access your upcoming classroom assignments with just a click on your Chromebook's home screen.
+Via Chrome Unboxed
+You might also like...

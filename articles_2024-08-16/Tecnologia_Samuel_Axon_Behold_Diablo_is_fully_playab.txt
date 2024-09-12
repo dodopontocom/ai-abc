@@ -1,0 +1,15 @@
+Título: Behold, Diablo is fully playable in your browser
+URL: https://arstechnica.com/?p=2043640
+
+You can now play the original Diablo (and its expansion, Hellfire) in virtually any web browser on any computer with generally excellent performance and operating-as-expected controls. It's all thanks to an open source project published on GitHub called Diabloweb that's now being circulated by game developers on X.
+In the README file in the project's GitHub repository, the project's developer (d07RiV) notes that it is based on DevilutionX, another open source project that did a lot of legwork to make Diablo run well on modern operating systems.
+"I've modified the code to remove all dependencies and exposed the minimal required interface with JS, allowing the game to be compiled into WebAssembly," writes d07RiV. "Event handling (especially in the menus) had to be modified significantly to fit the JS model."
+It's pretty easy to set up; you just visit the website, upload a file, and get going.
+You have to upload a file because the project doesn't include the Diablo game files—you'll have to provide those in the form of the DIABDAT.MPQ file in the Diablo install directory.
+There are three above-board ways to source this MPQ file. First, you can, of course, own a physical copy of the original game. Alternatively, you can purchase the game on GOG and install it, then pull the file from the installation directory.
+There's also a shareware release of Diablo, and you can pull the SPAWN.MPQ file from that, and it works just fine. That's not the full game, though, so that's more for if you just want to try it.
+Samuel Axon
+
+
+Samuel Axon
+I played the game for about half an hour using the MPQ from the GOG version without any issues on Firefox on a Mac. (There's no Mac version of the GOG installer, though, so I had to run the installer in a virtual Windows machine to get at the file.) The game is obviously primitive compared to more recent entries in the series (or even Diablo II), but it is an addictive blast to play regardless.

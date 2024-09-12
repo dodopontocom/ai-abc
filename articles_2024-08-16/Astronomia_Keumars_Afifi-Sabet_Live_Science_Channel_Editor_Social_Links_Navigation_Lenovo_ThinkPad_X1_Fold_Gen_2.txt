@@ -1,0 +1,48 @@
+Título: Lenovo ThinkPad X1 Fold Gen 2 laptop review
+URL: https://www.space.com/lenovo-thinkpad-x1-fold-gen-2-laptop-review
+
+The Lenovo ThinkPad X1 Fold is extremely versatile and offers a dazzlingly bright display that can be packed into a compact package, but the 16.3-inch foldable doesn't offer much firepower beneath the bonnet.
+Why you can trust Space.com Our expert reviewers spend hours testing and comparing products and services so you can choose the best for you. Find out more about how we test and review products.
+'Foldable' devices have been growing in stature and popularity in recent years, and on paper, one of the best 'foldable laptops' on the market is the LG ThinkPad X1 Fold, which boasts an immersive 16.3-inch OLED HDR display and incredible versatility. But how does it stack up against the best laptops for astronomy ?
+This device will give you plenty of screen real estate to work with media and any image editing, but questions will remain over whether it packs the firepower of the best-performing laptops on the market. Its massive foldable display and capacity to be used in a variety of different configurations in different environments come at a great price. For many, the stunning OLED HDR display may be worth the investment alone, but there are shortcomings compared with more conventional 2-in-1s that may undermine the value for money you expect from a great device.
+Lenovo ThinkPad X1 Fold Gen 2 laptop review
+Lenovo ThinkPad X1 Fold Gen 2: Design
+The Lenovo ThinkPad X1 Fold Gen 2 can be used in several configurations including with a detachable Bluetooth keyboard. (Image credit: Keumars Afifi-Sabet)
+Refreshing design
+Can be used in a variety of configurations
+Compact when folded away but heavy
+The LG ThinkPad X1 Fold Gen 2 can assume almost any role you want — but it's perhaps best as a portable monitor to view content. Its expansive 16.3-inch foldable display feels premium thanks to an aluminum chassis supported with magnesium and carbon fiber. And while you're best off making the most of the real estate you get, you can also use it as a handheld tablet in either portrait or landscape mode (if you're comfortable holding such a large display) — or even as a laptop when you fold it, with its lower half becoming a keyboard with haptic feedback.
+The Lenovo ThinkPad X1 Fold Gen 2 comes with a stylus. (Image credit: Keumars Afifi-Sabet)
+Specifications CPU: Intel Core i7-1250U
+RAM: 16GB LPDDR5
+GPU: Intel Iris Xe Graphics
+Storage: 512GB SSD
+Display: 16.3-inch OLED
+Weight: 4.27 lbs (1.94kg)
+Dimensions (WDH): 13.6 x 10.9 x 0.34 inches (345.7 x 276.2 x 8.6 mm)
+The LG ThinkPad X1 Fold can also be used with a detachable Bluetooth keyboard, a stylus that can snap onto the side (or top) of the display depending on how you're using it, and a kickstand that can be magnetically snapped onto its rear.
+In short, it's an extremely versatile device that can well serve a variety of needs. It's also engineered to be packed away in a neat package with a 12-inch diagonal — albeit, this device is a little heavier than you'd like. For example, the Asus Zenbook 17 Fold weighs just 3.31 lbs (1.50 kg) and has a larger screen, with the Lenovo ThinkPad X1 Fold weighing 4.27 lbs (1.94 kg).
+Lenovo ThinkPad X1 Fold Gen 2: Performance and features
+We found that you wouldn't be able to rely on this machine for intense graphics-based apps. (Image credit: Keumars Afifi-Sabet)
+Middling CPU performance
+Weak graphical performance
+Underwhelming battery life
+You wouldn't conventionally expect much firepower from a tablet — but you should from a Windows 11 device that's worth more than $3,000. That's where the Lenovo ThinkPad X1 Fold Gen 2 disappoints. Its Intel Core i7-1250U mobile CPU was deemed high-end a few generations ago, and you only get 16GB RAM as well as a 512GB SSD. Intel Iris Xe graphics, too, is an integrated configuration that predates the current state-of-the-art dedicated Intel Arc Graphics GPU.
+In other words, you aren't getting value for money with the Lenovo ThinkPad X1 Fold if performance is your priority — and that was reflected in our performance benchmarking. Testing with Geekbench 6 found decent single-threaded performance but disappointing multi-tasking results. Graphics performance, too, scored poorly compared to GPUs in the very latest machines. This means that you won't be able to rely on this machine for intense graphics-based applications — despite its display being great for viewing media.
+We were also disappointed with the battery life — just under eight hours in our looped video playback testing — which won't be enough to get you through a day of usage away from a power source. This is perhaps a cost of the form factor and power-guzzling 16.3-inch OLED display.
+There are a handful of ports with the ThinkPad X1 Fold, including three USB-C ports and a SIM card slot, with a 5MP webcam on the frame of the display too. The placement of the USB-C ports is odd, however, given one of these will always be obscured if you're using the display on your desk with the kickstand and keyboard. Alongside an optional SIM slot, connectivity options include Wi-Fi 6 and Bluetooth 5.1 — which, as with other components, are a few generations behind now.
+Lenovo ThinkPad X1 Fold Gen 2: Image editing
+The Lenovo ThinkPad X1 Fold Gen 2 is compact when it is folded away, but fairly heavy. (Image credit: Keumars Afifi-Sabet)
+Expansive and vivid OLED display
+Bright enough to work with, even outdoors
+The lack of 4K is disappointing
+The 16.3-inch OLED display is stunningly bright and vibrant and would be a great choice for viewing media and basic image and video editing. But there are some caveats to bear in mind and a few sore spots.
+Its 1.26:1 orientation, for example, is highly unusual and takes some getting used to because large black bars will appear above and beneath anything you're looking at in a conventional 16:9 format. But you get used to this, and having a bit more vertical space can be useful if you're working with visuals. We would have also loved a 4K display especially given the asking price — with the Lenovo ThinkPad X1 Fold only stretching to a 2,024 x 2,560 resolution, meaning a rather low pixels-per-inch (PPI) of 200.2. This would have capped off an otherwise bright and vibrant screen for graphics work.
+Indeed, we registered a brightness reading of 446 nits with our display calibrator, which is just shy of the 500 cd/m2 that Apple claims a MacBook Pro can reach. This brightness is complemented by a near-perfect 99.9% coverage of the sRGB color gamut — meaning it covers almost the full breadth of colors in the RGB space. This is alongside deep, inky blacks and great contrast you'd expect from OLED technology. There is marginal undersaturation of blues and reds and slight oversaturation of greens, but almost no color distortions.
+Lenovo ThinkPad X1 Fold Gen 2 laptop: User reviews
+Users tend to love the quality of the display you get with the LG ThinkPad X1 Fold — and that correlates precisely with our own testing. They love the extra real estate you get with a 16.3-inch display, and the quality of its foldable nature is so good that we needn't even mention it. But it's a little too large to use in your hands, and there are difficulties if using it in a clamshell configuration. If your primary requirement is a laptop — users tend to find it clunkier to use, while it's not going to perform as well as the latest high-end models.
+Should you buy the Lenovo ThinkPad X1 Fold Gen 2?
+There is plenty to love about the LG ThinkPad X1 Fold Gen 2 — and the foldable display itself is almost beyond reproach, saving the lack of 4K. But that's where the draw begins to fade. Investing in this machine will elevate your creative productivity, but only if you're going to make the most of its versatility, the different configurations you can work in, and you don't need to do any ultra-intensive graphical work that needs a dedicated GPU. Given how much it costs, too, you may be better off choosing a laptop and a monitor instead.
+The stunning display — which is a huge selling point — might not be compelling enough if you'd like to use this machine comfortably and reliably as a laptop for large swathes of time. But if you aim to use it to view media and work with images, and you can afford the hefty price tag, you could do much worse.
+If the Lenovo ThinkPad X1 Fold Gen 2 isn't for you
+We would recommend checking out the Asus Zenbook Fold 17, which is the closest device on the market to the LG ThinkPad X1 Fold right now. The specifications are similar and you get a larger screen as well as a slightly larger battery. Both machines are really expensive, though, and if you really don't need a foldable device, you could do worse than checking out the HP Spectre x360 14. This is a much smaller and more conventional 2-in-1 device that also comes with an OLED display and a stylus to help give you a creative boost.
